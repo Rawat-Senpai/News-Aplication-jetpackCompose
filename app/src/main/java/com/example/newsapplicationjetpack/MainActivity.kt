@@ -1,39 +1,36 @@
 package com.example.newsapplicationjetpack
 
-import android.graphics.drawable.Icon
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Search
+
 import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material.icons.outlined.ShoppingCart
-import androidx.compose.material3.Badge
-import androidx.compose.material3.BadgedBox
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.newsapplicationjetpack.api.NewsApi
-import com.example.newsapplicationjetpack.screens.BottomNavigationItem
-import com.example.newsapplicationjetpack.ui.theme.NewsApplicationJetpackTheme
-import com.example.newsapplicationjetpack.utils.BottomNavItem
+import com.example.newsapplicationjetpack.screens.HomeScreen
+import com.example.newsapplicationjetpack.screens.ScienceScreen
+import com.example.newsapplicationjetpack.screens.SportsScreen
+import com.example.newsapplicationjetpack.utils.Screens
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -56,33 +53,94 @@ class MainActivity : ComponentActivity() {
         }
 
         setContent {
+            MyBottomAppBar()
 
-            val item = listOf(
-                BottomNavigationItem(
-                    title = "General",
-                    selected = Icons.Filled.Home,
-                    unselectedIcon = Icons.Outlined.Home
-                ), BottomNavigationItem(
-                    title = "Sports",
-                    selected = Icons.Filled.ShoppingCart,
-                    unselectedIcon = Icons.Outlined.ShoppingCart
-                ), BottomNavigationItem(
-                    title = "Setting",
-                    selected = Icons.Filled.Settings,
-                    unselectedIcon = Icons.Outlined.Settings
+        }
+    }
+}
+
+@Composable
+fun MyBottomAppBar() {
+
+    val navigationController = rememberNavController()
+    val context = LocalContext.current.applicationContext
+    val selected = remember {
+        mutableStateOf(Icons.Default.Home)
+    }
+
+    Scaffold(bottomBar = {
+        BottomAppBar(containerColor = Color.Green) {
+            IconButton(
+                onClick = {
+                    selected.value = Icons.Default.Home
+                    navigationController.navigate(Screens.Home.screen) {
+                        popUpTo(0)
+                    }
+
+                },
+                modifier = Modifier.weight(1f)
+            ) {
+                Icon(
+                    Icons.Default.Home,
+                    contentDescription = null,
+                    modifier = Modifier.size(20.dp),
+                    tint = if (selected.value == Icons.Default.Home) Color.White else Color.DarkGray
                 )
-            )
+            }
+
+            IconButton(
+                onClick = {
+                    selected.value = Icons.Default.ShoppingCart
+                    navigationController.navigate(Screens.Science.screen) {
+                        popUpTo(0)
+                    }
+
+                },
+                modifier = Modifier.weight(1f)
+            ) {
+                Icon(
+                    Icons.Default.ShoppingCart,
+                    contentDescription = null,
+                    modifier = Modifier.size(20.dp),
+                    tint = if (selected.value == Icons.Default.ShoppingCart) Color.White else Color.DarkGray
+                )
+            }
+
+            IconButton(
+                onClick = {
+                    selected.value = Icons.Default.Search
+                    navigationController.navigate(Screens.Sports.screen) {
+                        popUpTo(0)
+                    }
+
+                },
+                modifier = Modifier.weight(1f)
+            ) {
+                Icon(
+                    Icons.Default.Search,
+                    contentDescription = null,
+                    modifier = Modifier.size(20.dp),
+                    tint = if (selected.value == Icons.Default.Search) Color.White else Color.DarkGray
+                )
+            }
+        }
+    }) {
+        paddingValues ->
+        NavHost(navController = navigationController,
+            startDestination = Screens.Home.screen ,
+            modifier = Modifier.padding(paddingValues)){
+            composable(Screens.Home.screen){ HomeScreen()}
+            composable(Screens.Science.screen){ ScienceScreen() }
+            composable(Screens.Sports.screen){ SportsScreen() }
+        }
+    }
 
 
-            NewsApplicationJetpackTheme {
-                // A surface container using the 'background' color from the theme
-                var selectedItemIndex by rememberSaveable {
-                    mutableStateOf(0)
-                }
-                Surface(
-                    modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background
-                ) {
-                    Scaffold(
+}
+
+
+/*
+    Scaffold(
                         bottomBar = {
                             NavigationBar {
                                 item.forEachIndexed { index, item ->
@@ -114,25 +172,5 @@ class MainActivity : ComponentActivity() {
                     ) {
 
                     }
+ */
 
-
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!", modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    NewsApplicationJetpackTheme {
-        Greeting("Android")
-    }
-}

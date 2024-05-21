@@ -1,4 +1,4 @@
-package com.example.newsapplicationjetpack.screens
+package com.example.newsapplicationjetpack.utils
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
