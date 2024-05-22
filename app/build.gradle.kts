@@ -93,8 +93,32 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
 
-
+    // coid
     implementation("io.coil-kt:coil-compose:2.0.0")
+
+    //Datastore
+    implementation ("androidx.datastore:datastore-preferences:1.0.0")
+
+    //Compose Foundation
+    implementation ("androidx.compose.foundation:foundation:1.4.3")
+
+    //Accompanist
+    implementation ("com.google.accompanist:accompanist-systemuicontroller:0.31.4-beta")
+
+    //Paging 3
+    val paging_version = "3.1.1"
+    implementation ("androidx.paging:paging-runtime:$paging_version")
+    implementation ("androidx.paging:paging-compose:3.2.0-rc01")
+
+    //Room
+    val room_version = "2.5.2"
+    implementation ("androidx.room:room-runtime:$room_version")
+    kapt ("androidx.room:room-compiler:$room_version")
+    implementation ("androidx.room:room-ktx:2.5.2")
+
+    //Splash Api
+    implementation ("androidx.core:core-splashscreen:1.0.1")
+
 
 
 }

@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 
 
@@ -35,11 +36,11 @@ fun NewsItemLayout(){
             Image(painter = painter, contentDescription ="ImageView" )
         }
 
-        Text(text = "Heading of the text ",)
+        Text(text = "Heading of the text ", fontSize = 14.sp)
 
-        Text(text = "Main Description of the data  ")
+        Text(text = "Main Description of the data  ", fontSize = 12.sp , maxLines = 3,)
 
-        Text(text = "Author of the text")
+        Text(text = "Author of the text", fontSize = 10.sp)
 
 
 

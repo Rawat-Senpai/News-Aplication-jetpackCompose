@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -46,12 +47,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        GlobalScope.launch {
-            var response = newsApi.getNewsHeadlines("1f2e109c082d4ee4b2ad94f523c1f220", "business")
+//        GlobalScope.launch {
+//            var response = newsApi.getNewsHeadlines("1f2e109c082d4ee4b2ad94f523c1f220", "business")
+//
+//            Log.d("CheckingTag", response.body().toString())
+//        }
 
-            Log.d("CheckingTag", response.body().toString())
-        }
-
+        installSplashScreen()
         setContent {
             MyBottomAppBar()
 
