@@ -18,12 +18,12 @@ val pages = listOf(
     Page(
         title = "Lorem Ipsum is simple dummy",
         description = "Lorem Ipsum is simple dummy Lorem Ipsum is simple dummy Lorem Ipsum is simple dummy",
-        image = R.drawable.onboarding1
+        image = R.drawable.onboarding2
     ),
     Page(
         title = "Lorem Ipsum is simple dummy",
         description = "Lorem Ipsum is simple dummy Lorem Ipsum is simple dummy Lorem Ipsum is simple dummy",
-        image = R.drawable.onboarding1
+        image = R.drawable.onboarding3
     )
 )
 

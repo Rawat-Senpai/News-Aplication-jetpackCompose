@@ -18,13 +18,15 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 import com.example.newsapplicationjetpack.R
 import com.example.newsapplicationjetpack.presentation.Dimens
 import com.example.newsapplicationjetpack.presentation.Dimens.MediumPadding1
+import com.example.newsapplicationjetpack.presentation.Dimens.MediumPadding2
 import com.example.newsapplicationjetpack.presentation.onboarding.Page
 import com.example.newsapplicationjetpack.presentation.onboarding.pages
 import com.example.newsapplicationjetpack.ui.theme.NewsApplicationJetpackTheme
-import org.w3c.dom.Text
+
 
 @Composable
 fun OnBoardingPage(
@@ -36,7 +38,7 @@ fun OnBoardingPage(
         Image(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(fraction = 0.6f),
+                .fillMaxHeight(fraction = 0.60f),
             painter = painterResource(id = page.image),
             contentDescription = null,
             contentScale = ContentScale.Crop
@@ -44,16 +46,18 @@ fun OnBoardingPage(
         Spacer(modifier = Modifier.height(MediumPadding1))
 
         Text(
-            text = page.title, modifier = Modifier.padding(horizontal = Dimens.MediumPadding2),
+            modifier = Modifier.padding(horizontal = MediumPadding2),
+            text = page.title,
             style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold),
             color = colorResource(id = R.color.display_small)
         )
-
         Text(
-            text = page.title, modifier = Modifier.padding(horizontal = Dimens.MediumPadding2),
-            style = MaterialTheme.typography.displayMedium.copy(fontWeight = FontWeight.Bold),
+            modifier = Modifier.padding(horizontal = MediumPadding2),
+            text = page.description,
+            style = MaterialTheme.typography.bodyMedium,
             color = colorResource(id = R.color.text_medium)
         )
+
     }
 
 }
