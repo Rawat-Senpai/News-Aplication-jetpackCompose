@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.WindowCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -48,16 +49,14 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var newsApi: NewsApi
 
-    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
 //        GlobalScope.launch {
 //            var response = newsApi.getNewsHeadlines("1f2e109c082d4ee4b2ad94f523c1f220", "business")
-//
 //            Log.d("CheckingTag", response.body().toString())
 //        }
-
+        WindowCompat.setDecorFitsSystemWindows(window,false)
         installSplashScreen()
         setContent {
             NewsApplicationJetpackTheme {

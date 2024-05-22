@@ -61,7 +61,6 @@ fun OnBoardingScreen() {
             PageIndicator(modifier= Modifier.width(Dimens.PageIndicatorWidth),pageSize = pages.size, selectedPage = pageState.currentPage)
 
             Row(verticalAlignment = Alignment.CenterVertically){
-
                 val scope = rememberCoroutineScope()
 
                 if (buttonState.value[0].isNotEmpty()){
@@ -84,11 +83,11 @@ fun OnBoardingScreen() {
                             }
                         }
                     )
-                
             }
 
         }
 
+        Spacer(modifier = Modifier.weight(.3f))
 
     }
 
