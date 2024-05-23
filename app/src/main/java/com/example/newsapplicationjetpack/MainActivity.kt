@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -35,6 +36,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.newsapplicationjetpack.api.NewsApi
 import com.example.newsapplicationjetpack.domain.userCases.AppEntryUseCases
+import com.example.newsapplicationjetpack.presentation.navgraph.NavGraph
 import com.example.newsapplicationjetpack.presentation.onboarding.OnBoardingScreen
 import com.example.newsapplicationjetpack.presentation.onboarding.OnBoardingViewModel
 import com.example.newsapplicationjetpack.screens.HomeScreen
@@ -42,6 +44,7 @@ import com.example.newsapplicationjetpack.screens.ScienceScreen
 import com.example.newsapplicationjetpack.screens.SportsScreen
 import com.example.newsapplicationjetpack.ui.theme.NewsApplicationJetpackTheme
 import com.example.newsapplicationjetpack.utils.Screens
+import com.example.newsapplicationjetpack.viewModels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -50,37 +53,27 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    @Inject
-    lateinit var newsApi: NewsApi
+    val viewModel by viewModels<MainViewModel>()
 
-    @Inject
-    lateinit var appEntryUseCases: AppEntryUseCases
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        GlobalScope.launch {
-//            var response = newsApi.getNewsHeadlines("1f2e109c082d4ee4b2ad94f523c1f220", "business")
-//            Log.d("CheckingTag", response.body().toString())
-//        }
-        WindowCompat.setDecorFitsSystemWindows(window,false)
-        installSplashScreen()
 
-        lifecycleScope.launch {
-            appEntryUseCases.readAppEntry().collect{
-               Log.d("CheckingData",it.toString())
+        WindowCompat.setDecorFitsSystemWindows(window,false)
+        installSplashScreen().apply {
+            setKeepOnScreenCondition{
+                viewModel.splashCondition
             }
         }
+
 
 
         setContent {
             NewsApplicationJetpackTheme {
                 Box(modifier = Modifier.background(color = MaterialTheme.colorScheme.background)){
-                    val viewModel :OnBoardingViewModel = hiltViewModel()
-
-                    OnBoardingScreen(
-                        events = viewModel::onEvent
-                    )
+                    val startDestination = viewModel.startDestination
+                    NavGraph(startDestination = startDestination)
                 }
             }
 
