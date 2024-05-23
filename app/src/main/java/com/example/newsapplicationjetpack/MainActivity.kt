@@ -28,11 +28,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.newsapplicationjetpack.api.NewsApi
+import com.example.newsapplicationjetpack.domain.userCases.AppEntryUseCases
 import com.example.newsapplicationjetpack.presentation.onboarding.OnBoardingScreen
+import com.example.newsapplicationjetpack.presentation.onboarding.OnBoardingViewModel
 import com.example.newsapplicationjetpack.screens.HomeScreen
 import com.example.newsapplicationjetpack.screens.ScienceScreen
 import com.example.newsapplicationjetpack.screens.SportsScreen
@@ -49,6 +53,9 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var newsApi: NewsApi
 
+    @Inject
+    lateinit var appEntryUseCases: AppEntryUseCases
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -58,10 +65,22 @@ class MainActivity : ComponentActivity() {
 //        }
         WindowCompat.setDecorFitsSystemWindows(window,false)
         installSplashScreen()
+
+        lifecycleScope.launch {
+            appEntryUseCases.readAppEntry().collect{
+               Log.d("CheckingData",it.toString())
+            }
+        }
+
+
         setContent {
             NewsApplicationJetpackTheme {
                 Box(modifier = Modifier.background(color = MaterialTheme.colorScheme.background)){
-                    OnBoardingScreen()
+                    val viewModel :OnBoardingViewModel = hiltViewModel()
+
+                    OnBoardingScreen(
+                        events = viewModel::onEvent
+                    )
                 }
             }
 

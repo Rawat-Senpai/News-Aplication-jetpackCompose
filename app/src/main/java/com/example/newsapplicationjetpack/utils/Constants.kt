@@ -11,5 +11,7 @@ object Constants {
     const val CATEGORY_SCIENCE = "science"
     const val CATEGORY_SPORTS = "sports"
     const val CATEGORY_TECHNOLOGY = "technology"
+    const val USER_SETTINGS="userSettings"
+    const val APP_ENTRY="appEntry"
 
 }
