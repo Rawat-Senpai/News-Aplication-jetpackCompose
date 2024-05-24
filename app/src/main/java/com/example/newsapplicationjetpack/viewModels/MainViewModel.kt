@@ -2,10 +2,8 @@ package com.example.newsapplicationjetpack.viewModels
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.example.newsapplicationjetpack.domain.userCases.AppEntryUseCases
-import dagger.hilt.android.scopes.ViewModelScoped
+import com.example.newsapplicationjetpack.domain.userCases.app_entry.AppEntryUseCases
 import javax.inject.Inject
-import  androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope

@@ -1,4 +1,4 @@
-package com.example.newsapplicationjetpack.domain.userCases
+package com.example.newsapplicationjetpack.domain.userCases.app_entry
 
 import com.example.newsapplicationjetpack.domain.manager.LocalUserManager
  import kotlinx.coroutines.flow.Flow

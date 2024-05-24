@@ -1,7 +1,6 @@
 package com.example.newsapplicationjetpack
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -16,7 +15,6 @@ import androidx.compose.material.icons.filled.Search
 
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -31,16 +29,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.newsapplicationjetpack.api.NewsApi
-import com.example.newsapplicationjetpack.domain.userCases.AppEntryUseCases
 import com.example.newsapplicationjetpack.presentation.navgraph.NavGraph
-import com.example.newsapplicationjetpack.presentation.onboarding.OnBoardingScreen
-import com.example.newsapplicationjetpack.presentation.onboarding.OnBoardingViewModel
 import com.example.newsapplicationjetpack.screens.HomeScreen
 import com.example.newsapplicationjetpack.screens.ScienceScreen
 import com.example.newsapplicationjetpack.screens.SportsScreen
@@ -49,9 +41,6 @@ import com.example.newsapplicationjetpack.utils.Screens
 import com.example.newsapplicationjetpack.viewModels.MainViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
