@@ -15,4 +15,12 @@ interface NewsApi {
         @Query("apikey") apiKey: String = Constants.API_KEY
     ) : NewsResponse
 
+
+    suspend fun searchNews(
+        @Query("q") searchQuery:String,
+        @Query("page") page:Int,
+        @Query("sources") source:String,
+        @Query("apikey") apiKey: String = Constants.API_KEY
+    ):NewsResponse
+
 }
