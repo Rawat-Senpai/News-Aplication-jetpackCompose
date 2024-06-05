@@ -1,5 +1,6 @@
 package com.example.newsapplicationjetpack.presentation.common
 
+import android.content.res.Configuration
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
@@ -25,8 +26,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.newsapplicationjetpack.R
+import com.example.newsapplicationjetpack.presentation.navgraph.Route
+import com.example.newsapplicationjetpack.ui.theme.NewsApplicationJetpackTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -108,5 +112,19 @@ fun Modifier.searchBar(): Modifier = composed {
         )
     } else {
         this
+    }
+}
+
+@Preview
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun SearchBarPreview() {
+    NewsApplicationJetpackTheme {
+        SearchBar(text = "",
+            readOnly = true,
+            onValueChange = {},
+            onClick = {
+
+            }, onSearch = {})
     }
 }
